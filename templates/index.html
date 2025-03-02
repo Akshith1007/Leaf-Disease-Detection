@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detection Using CNN</title>
+    <style>
+        body {
+            background-image: url('/static/plant.jpeg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .box {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent box */
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 0;
+        }
+
+        input[type="file"] {
+            margin: 10px 0;
+        }
+
+        .uploaded-image {
+            margin-top: 10px;
+            border: 2px solid white;
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .result-box {
+            background-color: rgba(0, 128, 0, 0.8); /* Greenish semi-transparent box */
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .image-result-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+
+        .image-box, .result-box {
+            flex: 1;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Project name box -->
+        <div class="box">
+            <h1>Plant Disease Detection</h1>
+        </div>
+
+        <!-- File upload box -->
+        <div class="box">
+            <h2>Select Image File</h2>
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" accept="image/*" required>
+                <br>
+                <input type="submit" value="Upload Image">
+            </form>
+        </div>
+
+        <!-- Uploaded image and prediction result display -->
+        {% if uploaded_image %}
+            <div class="image-result-container">
+                <!-- Uploaded image box -->
+                <div class="box image-box">
+                    <h2>Uploaded Image:</h2>
+                    <img src="{{ url_for('static', filename='uploads/' + uploaded_image) }}" alt="Uploaded Image" class="uploaded-image">
+                </div>
+
+                <!-- Prediction result box -->
+                <div class="box result-box">
+                    <h2>Prediction Result:</h2>
+                    <p>{{ result }}</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
